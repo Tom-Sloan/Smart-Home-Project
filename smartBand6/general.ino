@@ -29,8 +29,8 @@ void checkForButtonPress() {
   if (buttonState == HIGH) {
     sendData(hrmc, 1);
     buttonPressed = true;
-    Serial.print("ON BUTTON! ");
-    Serial.println(buttonState);
+//    Serial.print("ON BUTTON! ");
+//    Serial.println(buttonState);
     delay(100);
     digitalWrite(ledPin, HIGH);
     buttonPressedTimer = millis();
