@@ -1,0 +1,6 @@
+framework module Pods_XTech {
+  umbrella header "Pods-XTech-umbrella.h"
+
+  export *
+  module * { export * }
+}
