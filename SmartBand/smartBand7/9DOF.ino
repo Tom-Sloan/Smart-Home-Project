@@ -45,7 +45,7 @@ void printData() {
   dataString += ",";
   dataString += imu.mz;
   dataString += "\0";
-  Serial.print("DATASTRING: ");
-  Serial.print(dataString);
-  Serial.println("END");
+  output("DATASTRING: ");
+  output(dataString);
+  outputln("END");
 }

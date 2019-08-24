@@ -1,49 +1,4 @@
-//Check to see if the button has bee pressed
-void checkForAction() {
-  if (canSendAgain) {
-    if ((millis() - buttonPressedTimer) / 1000 < recordingTime) {
-      recordData();
-    } else {
-      sendData_imu(control);
-      canSendAgain = false;
-    }
-  }
-}
 
-//Setup pin mode for the digital pins
-void digitalPinStarter() {
-  // initialize the LED pin as an output:
-  pinMode(ledPin, OUTPUT);
-  // initialize the pushbutton pin as an input:
-  pinMode(buttonPin, INPUT);
-}
-
-
-//Checks to see if the button has been pressed.
-//If it has already been pressed it will set it to false after five seconds
-void checkForButtonPress() {
-
-  // read the state of the pushbutton value:
-  buttonState = digitalRead(buttonPin);
-
-  if (buttonState == HIGH) {
-    sendData(hrmc, 1);
-    buttonPressed = true;
-    Serial.print("ON BUTTON! ");
-    Serial.println(buttonState);
-    delay(100);
-    digitalWrite(ledPin, HIGH);
-    buttonPressedTimer = millis();
-  }
-
-  if ((millis() - buttonPressedTimer) / 1000 > timeBetween) {
-    buttonPressed = false;
-    canSendAgain = true;
-    hasCalibrated = false;
-    sendData(hrmc, 0);
-    digitalWrite(ledPin, LOW);
-  }
-}
 
 void startIMU() {
   imu.settings.device.commInterface = IMU_MODE_I2C;
@@ -52,9 +7,9 @@ void startIMU() {
 
   if (!imu.begin())
   {
-    Serial.println("Failed to communicate with LSM9DS1.");
-    Serial.println(" -check wiring.");
-    Serial.println("Default settings in this sketch will " \
+    outputln("Failed to communicate with LSM9DS1.");
+    outputln(" -check wiring.");
+    outputln("Default settings in this sketch will " \
                    "work for an out of the box LSM9DS1 " \
                    "Breakout, but may need to be modified " \
                    "if the board jumpers are.");
@@ -111,24 +66,40 @@ void getMeans() {
   imu.mx = mag_x / num_of_rec;
   imu.my = mag_y / num_of_rec;
   imu.mz = mag_z / num_of_rec;
-  Serial.print("ax: ");
+  //Serial.print("ax: ");
   Serial.print(imu.ax);
-  Serial.print(" ay: ");
+  Serial.print(",");
   Serial.print(imu.ay);
-  Serial.print(" az: ");
+  Serial.print(",");
   Serial.print(imu.az);
-  Serial.print(" gx: ");
+  Serial.print(",");
   Serial.print(imu.gx);
-  Serial.print(" gy: ");
+  Serial.print(",");
   Serial.print(imu.gy);
-  Serial.print(" gz: ");
+  Serial.print(",");
   Serial.print(imu.gz);
-  Serial.print(" mz: ");
+  Serial.print(",");
   Serial.print(imu.mx);
-  Serial.print(" my: ");
+  Serial.print(",");
   Serial.print(imu.my);
-  Serial.print(" mz: ");
+  Serial.print(",");
   Serial.println(imu.mz);
 
   num_of_rec = 0;
+}
+
+void output(String txt){
+  if(canOutput){
+    Serial.print(txt);
+  }
+}
+void output(int txt){
+  if(canOutput){
+    Serial.print(txt);
+  }
+}
+void outputln(String txt){
+  if(canOutput){
+    Serial.println(txt);
+  }
 }

@@ -3,16 +3,16 @@
 void sendData(BLECharacteristic BLEChar, int data) {
   //first value is the flag value. I can be set to legnth of array - 2 (therefore it could also be 0 currently) or that value(only tested for length 2)
   uint8_t dataArr[2] = { 0b00000110, data };           // Sensor connected, increment BPS value
-  Serial.println(data);
+  //Serial.println(data);
   // Note: We use .notify instead of .write!
   // If it is connected but CCCD is not enabled
   // The characteristic's value is still updated although notification is not sent
 
   if (BLEChar.notify(dataArr, sizeof(dataArr))) {
-    //Serial.print("Heart Rate Measurement updated to: "); Serial.println(data);
+    //output("Heart Rate Measurement updated to: "); outputln(data);
 
   } else {
-    //Serial.println("ERROR: Notify not set in the CCCD or not connected!");
+    //outputln("ERROR: Notify not set in the CCCD or not connected!");
   }
 }
 
@@ -24,8 +24,8 @@ void sendData_imu(BLECharacteristic BLEChar) {
   // If it is connected but CCCD is not enabled
   // The characteristic's value is still updated although notification is not sent
 
-  Serial.println("SENDING: ");
-  getMeans();
+  outputln("SENDING: ");
+  
   
   convert(val, imu.ax, 0);
   convert(val, imu.ay, 4);
@@ -36,18 +36,18 @@ void sendData_imu(BLECharacteristic BLEChar) {
   convert(val, imu.mx, 24);
   convert(val, imu.my, 28);
   convert(val, imu.mz, 32); 
-  for(int i = 0; i < 36; i++){
-    Serial.print(val[i]);
-  }
-  Serial.println();
-  Serial.print(num_of_rec);
-  Serial.print("CONT");
+//  for(int i = 0; i < 36; i++){
+//    Serial.print(val[i]);
+//  }
+//  outputln("");
+//  Serial.print(num_of_rec);
+//  output("CONT");
   uint8_t dataArr[36] = { val[0], val[1], val[2], val[3], val[4], val[5], val[6], val[7], val[8], val[9], val[10], val[11], val[12], val[13], val[14], val[15], val[16], val[17], val[18], val[19], val[20], val[21], val[22], val[23], val[24], val[25], val[26] ,val[27], val[28], val[29], val[30], val[31], val[32], val[33], val[34], val[35]};
   if (BLEChar.notify(dataArr, sizeof(dataArr))) {
-    //Serial.print("Heart Rate Measurement updated to: "); Serial.println(data);
+    //output("Heart Rate Measurement updated to: "); outputln(data);
 
   } else {
-    //Serial.println("ERROR: Notify not set in the CCCD or not connected!");
+    //outputln("ERROR: Notify not set in the CCCD or not connected!");
   }
 }
 
@@ -151,8 +151,8 @@ void connect_callback(uint16_t conn_handle)
   char central_name[32] = { 0 };
   Bluefruit.Gap.getPeerName(conn_handle, central_name, sizeof(central_name));
 
-  Serial.print("Connected to ");
-  Serial.println(central_name);
+  output("Connected to ");
+  outputln(central_name);
 }
 
 /**
@@ -165,33 +165,33 @@ void disconnect_callback(uint16_t conn_handle, uint8_t reason)
   (void) conn_handle;
   (void) reason;
 
-  Serial.println("Disconnected");
-  Serial.println("Advertising!");
+  outputln("Disconnected");
+  outputln("Advertising!");
 }
 
 void cccd_callback(BLECharacteristic& chr, uint16_t cccd_value)
 {
   // Display the raw request packet
-  Serial.print("CCCD Updated: ");
+  output("CCCD Updated: ");
   //Serial.printBuffer(request->data, request->len);
-  Serial.print(cccd_value);
-  Serial.println("");
+  //Serial.print(cccd_value);
+  outputln("");
 
   // Check the characteristic this CCCD update is associated with in case
   // this handler is used for multiple CCCD records.
   if (chr.uuid == hrmc.uuid) {
     if (chr.notifyEnabled()) {
-      Serial.println("Heart Rate Measurement 'Notify' enabled");
+      outputln("Heart Rate Measurement 'Notify' enabled");
     } else {
-      Serial.println("Heart Rate Measurement 'Notify' disabled");
+      outputln("Heart Rate Measurement 'Notify' disabled");
     }
   }
   
   if (chr.uuid == control.uuid) {
     if (chr.notifyEnabled()) {
-      Serial.println("Control 'Notify' enabled");
+      outputln("Control 'Notify' enabled");
     } else {
-      Serial.println("Control 'Notify' disabled");
+      outputln("Control 'Notify' disabled");
     }
   }
 }

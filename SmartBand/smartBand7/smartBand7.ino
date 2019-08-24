@@ -20,6 +20,7 @@ BLEDis bledis;    // DIS (Device Information Service) helper class instance
 BLEBas blebas;    // BAS (Battery Service) helper class instance
 
 LSM9DS1 imu;
+bool canOutput = false;
 
 // Button Variables will change:
 int buttonState = 0;
@@ -68,15 +69,15 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
 
-  Serial.println("SmartBand Serial");
-  Serial.println("-----------------------\n");
+  outputln("SmartBand Serial");
+  outputln("-----------------------\n");
 
   // Initialise the Bluefruit module
-  Serial.println("Initialise the Bluefruit nRF52 module");
+  outputln("Initialise the Bluefruit nRF52 module");
   Bluefruit.begin();
 
   // Set the advertised device name (keep it short!)
-  Serial.println("Setting Device Name to 'SmartBand'");
+  outputln("Setting Device Name to 'SmartBand'");
   Bluefruit.setName("SmartBand");
 
   // Set the connect/disconnect callback handlers
@@ -84,49 +85,45 @@ void setup()
   Bluefruit.setDisconnectCallback(disconnect_callback);
 
   // Configure and Start the Device Information Service
-  Serial.println("Configuring the Device Information Service");
+  outputln("Configuring the Device Information Service");
   bledis.setManufacturer("XTech");
   bledis.setModel("Universal 1");
   bledis.begin();
 
   // Start the BLE Battery Service and set it to 100%
-  Serial.println("Configuring the Battery Service");
+  outputln("Configuring the Battery Service");
   blebas.begin();
   blebas.write(100);
 
   // Setup the Heart Rate Monitor service using
   // BLEService and BLECharacteristic classes
-  Serial.println("Configuring the Heart Rate Monitor Service");
+  outputln("Configuring the Heart Rate Monitor Service");
   setupHRM();
 
   // Setup the advertising packet(s)
-  Serial.println("Setting up the advertising payload(s)");
+  outputln("Setting up the advertising payload(s)");
   startAdv();
 
-  Serial.println("\nAdvertising");
-  digitalPinStarter();
+  outputln("\nAdvertising");
+  
 
   startIMU();
-  Serial.println("Ending setup");
+  outputln("Ending setup");
 
 }
 
 void loop()
 {
-  
+
   if ( Bluefruit.connected() ) {
-    //updates button val
-    //checkForButtonPress();
-    sendData(hrmc, 2);
-    
-//    if (buttonPressed) {
-//      checkForAction();
-//    } else {
-//
-//      timeBetweenAccelRead = 0;
-//      lastReadingTime = millis();
-//    }
-    
+    if (millis() - lastReadingTime > 100) {
+      recordData();
+      getMeans();
+      sendData_imu(control);
+      timeBetweenAccelRead = 0;
+      lastReadingTime = millis();
+    }
+
 
   }
 
