@@ -21,7 +21,7 @@
    Heart Rate Measurement Char: 0x2A37
    Body Sensor Location Char:   0x2A38
 */
-BLEService        hrms = BLEService(0x8888);
+BLEService        hrms = BLEService(0x2aceab38cb354edcbc48f2510e458ea8);
 BLECharacteristic hrmc = BLECharacteristic(UUID16_CHR_HEART_RATE_MEASUREMENT);
 BLECharacteristic bslc = BLECharacteristic(UUID16_CHR_BODY_SENSOR_LOCATION);
 BLECharacteristic toggleCUUID(0x0001);

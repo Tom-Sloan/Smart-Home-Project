@@ -32,6 +32,7 @@ for x in range(len(folders)):
    os.chdir(folders[x])
    #print("Temp is changing folders to ", temp)
    for c in range(len(os.listdir(folders[x]))):
+       #if not c.strip(): continue  # skip the empty line
        print(x);
        dataset = pd.read_csv(temp[c], sep=",", header=None);
        dataset.columns = ["acc_x", "acc_y", "acc_z", "gyr_x", "gyr_y", "gyr_z", "mag_x", "mag_y", "mag_z"];
