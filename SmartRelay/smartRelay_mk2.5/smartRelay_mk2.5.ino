@@ -82,7 +82,7 @@ void setup()
   pinMode(lightPin, INPUT);
   pinMode(blindPin, INPUT);
 
-  connectToDevice(blindUUID);
+  connectToDevice(lightUUID);
 }
 
 void loop()
@@ -94,8 +94,8 @@ void loop()
   //  } else {
   //    connectToDevice(hrms);
   //  }
-  if ( !Bluefruit.connected() ) {
-
+  if ( Bluefruit.connected() ) {
+      
     
   }
 

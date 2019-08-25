@@ -135,30 +135,13 @@ void loop()
       Serial.print("1: ");
       Serial.print(digitalRead(blindPinUp));
       timeDelay = millis();
-      valueSending = 1;
+      if (valueSending == 1){
+        valueSending = 2;
+      }else{
+        valueSending = 1;
+      }
       sendEvent(&blindUUID);
       Serial.print("Blinds up");
-    } else if (digitalRead(blindPinDown)) {
-      Serial.print("2: ");
-      Serial.print(digitalRead(blindPinDown));
-      timeDelay = millis();
-      valueSending = 2;
-      sendEvent(&blindUUID);
-      Serial.print("Blinds down");
-    } else if (digitalRead(lightPinOn)) {
-      Serial.print("3: ");
-      Serial.print(digitalRead(lightPinOn));
-      timeDelay = millis();
-      valueSending = 1;
-      sendEvent(&lightUUID);
-      Serial.print("lights on");
-    } else if (digitalRead(lightPinOff)) {
-      Serial.print("4: ");
-      Serial.print(digitalRead(lightPinOff));
-      timeDelay = millis();
-      valueSending = 2;
-      sendEvent(&lightUUID);
-      Serial.print("lights off");
     } else if (hasPaired) {
       Bluefruit.Central.disconnect(conn);
       hasPaired = false;

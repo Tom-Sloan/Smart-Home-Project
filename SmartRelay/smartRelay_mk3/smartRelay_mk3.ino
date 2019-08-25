@@ -124,8 +124,14 @@ void setup()
 void loop()
 {
 
-  int reading = digitalRead(buttonPin);
-  sendEvent(reading);
+  if (!Bluefruit.connected()){
+    connectToDevice(&lightUUID);
+  }else{
+    sendEvent(1);
+    Bluefruit.Central.disconnect(conn);
+  }
+//  int reading = digitalRead(buttonPin);
+//  sendEvent(reading);
 }
 
 void sendEvent(int trigger) {

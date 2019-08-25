@@ -36,8 +36,9 @@ for x in range(len(folders)):
        print(x);
        dataset = pd.read_csv(temp[c], sep=",", header=None);
        dataset.columns = ["acc_x", "acc_y", "acc_z", "gyr_x", "gyr_y", "gyr_z", "mag_x", "mag_y", "mag_z"];
+       dataset = dataset.drop(["mag_x", "mag_y", "mag_z"], axis = 1)
        ds_move.append(x);
-       ds_mean.append(dataset.mean().tolist());
+       ds_mean.append((dataset.mean()/10000).tolist());
        ds_var.append(dataset.var().tolist());
        ds_std.append(dataset.std().tolist());
        ds_slp.append(dataset.apply(lambda x: np.polyfit(dataset.index, x, 1)[0]).tolist());
@@ -80,23 +81,27 @@ for x in range(len(folders)):
 
 
 test_1 = ds_mean[10]
-test_2 = ds_mean[14]
-test_3 = ds_mean[600]
+test_2 = ds_mean[2000]
+test_3 = ds_mean[1000]
 tests = [test_1, test_2, test_3]
 
 # Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(ds_mean, ds_move, test_size = 0.25)
 
+#X_train/10000
+#X_test/10000
+#print(X_train[:10], "\n", X_test[:10])
 # Feature Scaling
-from sklearn.preprocessing import StandardScaler
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+#from sklearn.preprocessing import StandardScaler
+#sc = StandardScaler()
+#X_train = sc.fit_transform(X_train)
+#X_test = sc.transform(X_test)
+
 
 # Fitting SVM to the Training set
 from sklearn.svm import SVC
-classifier = SVC()
+classifier = SVC(probability=True)
 classifier.fit(X_train, y_train)
 
 # Predicting the Test set results
@@ -106,3 +111,31 @@ y_pred = classifier.predict(X_test)
 from sklearn.metrics import confusion_matrix, accuracy_score
 cm = confusion_matrix(y_test, y_pred)
 acc = accuracy_score(y_test, y_pred)
+
+
+#Test
+data = pd.read_csv("data_3.txt", sep=",", header=None);
+data.columns = ["acc_x", "acc_y", "acc_z", "gyr_x", "gyr_y", "gyr_z", "mag_x", "mag_y", "mag_z"];
+data = data.drop(["mag_x", "mag_y", "mag_z"], axis = 1)
+
+data_mean = []
+data_mean.append((data.mean()/10000).tolist());
+
+data_pred = classifier.predict_proba(data_mean)
+plt.figure(13)
+plt.plot(data.acc_x)
+ 
+plt.plot(data.acc_y)
+ 
+plt.plot(data.acc_z)
+
+data = pd.read_csv("4.txt", sep=",", header=None);
+data.columns = ["acc_x", "acc_y", "acc_z", "gyr_x", "gyr_y", "gyr_z", "mag_x", "mag_y", "mag_z"];
+data = data.drop(["mag_x", "mag_y", "mag_z"], axis = 1)
+
+plt.figure(2)
+plt.plot(data.acc_x)
+ 
+plt.plot(data.acc_y)
+ 
+plt.plot(data.acc_z)

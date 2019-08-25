@@ -116,7 +116,7 @@ void loop()
 {
 
   if ( Bluefruit.connected() ) {
-    if (millis() - lastReadingTime > 100) {
+    if (millis() - lastReadingTime > 10) {
       recordData();
       getMeans();
       sendData_imu(control);
