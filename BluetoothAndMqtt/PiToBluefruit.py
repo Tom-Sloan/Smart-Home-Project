@@ -32,14 +32,19 @@ def main():
     uuid = UUID(int(args.chara_uuid, 16)) # Convert hexstring to int-hex of passed argument and create UUID
     message = args.message # Gets message passed which was third argument
     
+    send_ble(addr, uuid, message)
     
     
-    p = Peripheral(addr, "random") # Connect to Peripheral with addr
-    ch = p.getCharacteristics(uuid=uuid)[0] # Get first Characteristic of Peripheral
-    print("Sending {}".format(message)) 
-    ch.write(str.encode(message), withResponse=True) # Send message as bytes, withResponse checks if message sent
-    p.disconnect() # Disconnect from Peripheral
     
-    
+def send_ble(addr="CA:34:A7:E4:DF:50", uuid=0x0001, message='2'):
+    try:
+        print("ble sending ", message)
+        p = Peripheral(addr, "random") # Connect to Peripheral with addr
+        ch = p.getCharacteristics(uuid=uuid)[0] # Get first Characteristic of Peripheral
+        print("Sending {}".format(message)) 
+        ch.write(str.encode(message), withResponse=True) # Send message as bytes, withResponse checks if message sent
+    finally:
+        p.disconnect() # Disconnect from Peripheral
+
 if __name__ == '__main__':
     main()
