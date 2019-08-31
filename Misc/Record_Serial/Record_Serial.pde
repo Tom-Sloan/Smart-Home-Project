@@ -3,7 +3,7 @@ Serial mySerial;
 PrintWriter output;
 void setup() {
    mySerial = new Serial( this, Serial.list()[0], 115200 );
-   output = createWriter( "data.txt" );
+   output = createWriter( "data_7.txt" );
 }
 void draw() {
     if (mySerial.available() > 0 ) {
@@ -18,4 +18,4 @@ void keyPressed() {
     output.flush();  // Writes the remaining data to the file
     output.close();  // Finishes the file
     exit();  // Stops the program
-}
+} 
