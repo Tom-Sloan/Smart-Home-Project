@@ -38,7 +38,7 @@ void disconnect_callback(uint16_t conn_handle, uint8_t reason);
 //light variables
 bool greenLightStatus = true;
 bool blueLightStatus = false;
-int bluePin = 7;
+int bluePin = 15;
 int greenPin = 11;
 
 int irPin = 27;

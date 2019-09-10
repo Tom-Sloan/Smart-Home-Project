@@ -17,8 +17,8 @@ folders = []
 # r=root, d=directories, f = files
 for r, d, f in os.walk(path):
     for folder in d:
-        if folder == "untitled2-checkpoint.ipynb"
-            continu
+        if folder == "untitled2-checkpoint.ipynb":
+            continue
         else:
             print(folder)
             folders.append(os.path.join(r, folder))
@@ -175,4 +175,24 @@ plt.plot(data.acc_y)
 
 plt.plot(data.acc_z)
 plt.show()
+'''
+'''
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+
+classifier_rf = RandomForestClassifier()
+
+parameters_rf = {'n_estimators': [10, 25, 50, 100],
+              'min_samples_split': [2, 3, 4],
+              'min_samples_leaf': [1, 2, 3],
+              'max_features': ['auto', 'sqrt', 'log2', 'None']
+             }
+grid_search_rf = GridSearchCV(estimator=classifier_rf, param_grid=parameters_rf, scoring="accuracy", cv=4)
+grid_search_rf = grid_search_rf.fit(X_train, y_train)
+df = pd.DataFrame(grid_search.cv_results_, columns=["acc_x", "acc_y", "acc_z", "gyr_x", "gyr_y", "gyr_z", "mag_x", "mag_y", "mag_z"])
+print(df)
+print(grid_search_rf.cv_results_)
+print('\n\n')
+print(grid_search_rf.best_params_)
+print(grid_search_rf.best_score_)
 '''
