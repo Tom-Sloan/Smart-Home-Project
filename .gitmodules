@@ -1,0 +1,3 @@
+[submodule "SwiftMQTT"]
+	path = SwiftMQTT
+	url = https://github.com/aciidb0mb3r/SwiftMQTT

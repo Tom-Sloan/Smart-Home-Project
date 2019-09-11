@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb2432571480324191</string>
+      </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>2432571480324191</string>
+  <key>FacebookDisplayName</key>
+  <string>XTech</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbapi</string>
+    <string>fb-messenger-share-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+  </array>
+  
+	<key>CLIENT_ID</key>
+	<string>82545452658-jlqheev1qt0bhuivmpbl3qv91j1e5g65.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.82545452658-jlqheev1qt0bhuivmpbl3qv91j1e5g65</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDIVMD0etKack6_HOuS-o5ITNHXcY1pj6M</string>
+	<key>GCM_SENDER_ID</key>
+	<string>82545452658</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sloantom.XTech</string>
+	<key>PROJECT_ID</key>
+	<string>xtech-427ca</string>
+	<key>STORAGE_BUCKET</key>
+	<string>xtech-427ca.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:82545452658:ios:c30975f63f78156b</string>
+	<key>DATABASE_URL</key>
+	<string>https://xtech-427ca.firebaseio.com</string>
+</dict>
+</plist>
