@@ -54,11 +54,18 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Devices" largeTitleDisplayMode="always" id="oM9-J4-V4h">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gbh-RA-Yd8">
-                            <connections>
-                                <action selector="addDevice:" destination="BYZ-38-t0r" id="HRA-If-LIt"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="gbh-RA-Yd8">
+                                <connections>
+                                    <action selector="addDevice:" destination="BYZ-38-t0r" id="HRA-If-LIt"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="wG3-EW-u7F">
+                                <connections>
+                                    <segue destination="cce-6E-Xhb" kind="show" id="uOy-Hc-jYk"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tabBarIcon" destination="oId-mq-lCS" id="7uv-fm-C20"/>
@@ -164,6 +171,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBC-QW-bTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5786" y="-1137"/>
+        </scene>
+        <!--IP Add-->
+        <scene sceneID="dG4-J2-bUR">
+            <objects>
+                <viewController title="IP Add" id="cce-6E-Xhb" customClass="AddIPAddress" customModule="XTech" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ito-ON-7Z3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="IP Address of home" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WeG-Ya-SMe">
+                                <rect key="frame" x="20" y="88" width="374" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJE-RS-lSk">
+                                <rect key="frame" x="20" y="126" width="118" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="6Zz-4U-R0y"/>
+                                    <constraint firstAttribute="width" constant="118" id="sRC-g5-JhW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACEHOLDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMh-NB-tFh">
+                                <rect key="frame" x="184" y="126" width="210" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Tg4-8F-3gJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UMh-NB-tFh" firstAttribute="leading" secondItem="UJE-RS-lSk" secondAttribute="trailing" constant="46" id="2Ux-gc-Dca"/>
+                            <constraint firstItem="WeG-Ya-SMe" firstAttribute="top" secondItem="KS5-UN-kOL" secondAttribute="top" id="Ciq-Dt-tpf"/>
+                            <constraint firstItem="WeG-Ya-SMe" firstAttribute="leading" secondItem="KS5-UN-kOL" secondAttribute="leading" constant="20" id="I6t-yi-ukZ"/>
+                            <constraint firstItem="KS5-UN-kOL" firstAttribute="trailing" secondItem="WeG-Ya-SMe" secondAttribute="trailing" constant="20" id="LY5-5a-b3h"/>
+                            <constraint firstItem="KS5-UN-kOL" firstAttribute="trailing" secondItem="UMh-NB-tFh" secondAttribute="trailing" constant="20" id="NiS-92-s2y"/>
+                            <constraint firstItem="UJE-RS-lSk" firstAttribute="top" secondItem="WeG-Ya-SMe" secondAttribute="bottom" constant="8" id="OPs-gw-A2N"/>
+                            <constraint firstItem="UJE-RS-lSk" firstAttribute="leading" secondItem="KS5-UN-kOL" secondAttribute="leading" constant="20" id="ao4-KP-rXE"/>
+                            <constraint firstItem="UMh-NB-tFh" firstAttribute="top" secondItem="WeG-Ya-SMe" secondAttribute="bottom" constant="8" id="pvE-P5-kTE"/>
+                            <constraint firstItem="UJE-RS-lSk" firstAttribute="top" secondItem="WeG-Ya-SMe" secondAttribute="bottom" constant="8" id="t7f-80-9UQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="KS5-UN-kOL"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="IP Add" id="kih-mY-843">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="TyX-fd-U6z">
+                            <connections>
+                                <action selector="saveBtn:" destination="cce-6E-Xhb" id="i4t-Lw-Nld"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="currentIP" destination="UMh-NB-tFh" id="uiI-ca-2oz"/>
+                        <outlet property="textField" destination="WeG-Ya-SMe" id="Pac-Yp-0E4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8EK-Ov-8xO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6718.840579710145" y="-1148.4375"/>
         </scene>
         <!--Device Infromation View Controller-->
         <scene sceneID="IvK-Tx-Txl">
@@ -1016,7 +1087,6 @@
         <!--Create Alarm-->
         <scene sceneID="TuB-hu-pLD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ls7-hs-dz5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Create Alarm" id="gQY-p6-PgB" customClass="newAlarmController" customModule="XTech" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EeT-CY-aB1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -1139,6 +1209,7 @@
                         <outlet property="wednesday" destination="5Dh-3K-oIL" id="iQg-wL-jaY"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ls7-hs-dz5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3413" y="-679"/>
         </scene>

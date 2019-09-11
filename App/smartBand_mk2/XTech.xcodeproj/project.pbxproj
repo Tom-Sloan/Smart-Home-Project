@@ -46,6 +46,7 @@
 		FA88162C22E6689E008EFBBB /* newAlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88162B22E6689E008EFBBB /* newAlarmController.swift */; };
 		FADCCE0C22CBEF12002C83C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FADCCE0B22CBEF12002C83C7 /* GoogleService-Info.plist */; };
 		FAE5310C230F3AC50085A90D /* IDETemplateMacros.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAE5310B230F3AC50085A90D /* IDETemplateMacros.plist */; };
+		FAE5310E2310315D0085A90D /* AddIPAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE5310D2310315D0085A90D /* AddIPAddress.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		FA88162B22E6689E008EFBBB /* newAlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newAlarmController.swift; sourceTree = "<group>"; };
 		FADCCE0B22CBEF12002C83C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SupportFiles/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAE5310B230F3AC50085A90D /* IDETemplateMacros.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IDETemplateMacros.plist; sourceTree = SOURCE_ROOT; };
+		FAE5310D2310315D0085A90D /* AddIPAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIPAddress.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 				FA88160222D79825008EFBBB /* Device.swift */,
 				FA88162122E4B8C4008EFBBB /* userAlarm.swift */,
 				FA88162B22E6689E008EFBBB /* newAlarmController.swift */,
+				FAE5310D2310315D0085A90D /* AddIPAddress.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMQTT/SwiftMQTT.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -402,6 +406,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMQTT.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -422,6 +427,7 @@
 				FA88161222DE7CA2008EFBBB /* newDeviceViewController.swift in Sources */,
 				FA32DCA622D3D6D800FB2131 /* About.swift in Sources */,
 				FA32DCA322D3AB2D00FB2131 /* menuCell.swift in Sources */,
+				FAE5310E2310315D0085A90D /* AddIPAddress.swift in Sources */,
 				FA88160322D79825008EFBBB /* Device.swift in Sources */,
 				FA32DC8B22D3A4EE00FB2131 /* ViewController.swift in Sources */,
 				FA32DC9622D3A63200FB2131 /* test.swift in Sources */,

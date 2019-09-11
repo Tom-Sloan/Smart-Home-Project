@@ -9,6 +9,7 @@ let bodySensorLocationCharacteristicCBUUID = CBUUID(string: "2A38")
 let controlStatusCharacteristicCBUUID = CBUUID(string: "0x0001")
 private let move = movement()
 
+var ipAddress = "192.168.0.186"
 var means: [Int] = Array(repeating: 0, count: 9)
 var val = true
 var setColorLeft = false
@@ -49,7 +50,7 @@ class DeviceViewController: UIViewController, deviceToDeviceSegue{
     
     super.viewDidLoad()
     devicesList.removeAll()
-    navigationController?.navigationBar.prefersLargeTitles = true
+    
     
     centralManager = CBCentralManager(delegate: self, queue: nil)
     tableView.delegate = self
@@ -341,7 +342,8 @@ extension DeviceViewController: CBPeripheralDelegate {
   func sendValue(parameters: Dictionary<String, String>){
     
     if(parameters["id"] != "" && parameters["action"] != ""){
-      guard let url = URL(string: "http://192.168.0.186") else { return }
+      guard let url = URL(string: "http://" + ipAddress) else { return }
+      print("Sending to: ", ipAddress)
       var request = URLRequest(url: url)
       request.httpMethod = "POST"
       request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -410,6 +412,8 @@ extension DeviceViewController : UITableViewDelegate, UITableViewDataSource{
     cell.contentsMotion.text = devicesList[indexPath.row].location
     
     cell.delegate = self
+    cell.ipAddress = ipAddress
+    print(ipAddress)
     cell.row = indexPath.row
     
     
@@ -435,7 +439,13 @@ extension DeviceViewController : UITableViewDelegate, UITableViewDataSource{
       let vc = segue.destination as! newDeviceViewController
       vc.bleId = newBlueToothId
       print("Setting vc.bleId: ", newBlueToothId)
+    }else if segue.destination is AddIPAddress {
+      let vc = segue.destination as! AddIPAddress
+      vc.ipAdd = ipAddress
+      vc.delegate = self
+      print("Setting ip as  ", ipAddress)
     }
+    
   }
   
 }
@@ -485,6 +495,15 @@ extension DeviceViewController: NFCNDEFReaderSessionDelegate{
     nfcSession = nil
     
   }
+}
+extension DeviceViewController : saveIp {
+  func setIpAddress(ip: String) {
+    ipAddress = ip
+    print(ipAddress)
+    self.tableView.reloadData()
+  }
+
+  
 }
 
 

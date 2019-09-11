@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SwiftMQTT
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, btnEvent {
   var alarms : [userAlarm] = []
@@ -191,6 +192,70 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
       messageTableView.estimatedRowHeight = 115.0
       
     }
+//  
+//  func subscribeToChannel() {
+//    let channel = "other"
+//    mqttSession.subscribe(to: channel, delivering: .atLeastOnce) { (error) in
+//      if error == .none {
+//        print("Subscribed to \(channel)")
+//      } else {
+//        print("Error occurred during subscription:")
+//        print(error.description)
+//      }
+//    }
+//  }
+//  
+//  
+  
+  // MARK: - MQTTSessionDelegates
+  
+  func mqttDidReceive(message: MQTTMessage, from session: MQTTSession) {
+    print("data received on topic \(message.topic) message \(message.stringRepresentation ?? "<>")")
+  }
+  
+  func mqttDidDisconnect(session: MQTTSession, error: MQTTSessionError) {
+    print("Session Disconnected.")
+    if error != .none {
+      print(error.description)
+    }
+  }
+  
+  func mqttDidAcknowledgePing(from session: MQTTSession) {
+    print("Keep-alive ping acknowledged.")
+  }
+  
+  // MARK: - Utilities
+  
+  func clientID() -> String {
+    
+    let userDefaults = UserDefaults.standard
+    let clientIDPersistenceKey = "clientID"
+    let clientID: String
+    
+    if let savedClientID = userDefaults.object(forKey: clientIDPersistenceKey) as? String {
+      clientID = savedClientID
+    } else {
+      clientID = randomStringWithLength(5)
+      userDefaults.set(clientID, forKey: clientIDPersistenceKey)
+      userDefaults.synchronize()
+    }
+    
+    return clientID
+  }
+  
+  // http://stackoverflow.com/questions/26845307/generate-random-alphanumeric-string-in-swift
+  func randomStringWithLength(_ len: Int) -> String {
+    let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    
+    var randomString = String()
+    for _ in 0..<len {
+      let length = UInt32(letters.count)
+      let rand = arc4random_uniform(length)
+      let index = String.Index(encodedOffset: Int(rand))
+      randomString += String(letters[index])
+    }
+    return String(randomString)
+  }
     
 }
 extension ViewController : alarmCellDetect{
