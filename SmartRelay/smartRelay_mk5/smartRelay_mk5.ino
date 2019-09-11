@@ -12,7 +12,7 @@
 */
 
 BLEClientService        hrms(0x7777);
-BLEClientService        blindUUID(0x9999);
+BLEClientService        blindUUID(0x8888);
 BLEClientService        lightUUID(0x8888);
 
 BLEClientCharacteristic responseCUUID(UUID16_CHR_HEART_RATE_MEASUREMENT);
@@ -98,7 +98,7 @@ void loop()
 {
   if (millis() - timeDelay > 2000) {
     
-    if (event[0] != NULL) {
+    if (!hasPaired) { // event[0] != NULL
       Serial.print("1: ");
       timeDelay = millis();
       valueSending = 1;

@@ -30,7 +30,7 @@
 */
 
 BLEClientService        hrms(0x7777);
-BLEClientService        blindUUID(0x9999);
+BLEClientService        blindUUID(0x8888); //0x9999
 BLEClientService        lightUUID(0x8888);
 BLEClientService        irUUID(0x1111);
 
@@ -131,7 +131,7 @@ void loop()
 {
   if (millis() - timeDelay > 2000) {
 
-    if (digitalRead(blindPinUp)) {
+    if (!hasPaired) { // digitalRead(blindPinUp)
       Serial.print("1: ");
       Serial.print(digitalRead(blindPinUp));
       timeDelay = millis();
@@ -162,6 +162,7 @@ void loop()
     } else if (hasPaired) {
       Bluefruit.Central.disconnect(conn);
       hasPaired = false;
+      Serial.println("Disconnecting");
     }
   }
 }

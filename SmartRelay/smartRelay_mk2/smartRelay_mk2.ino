@@ -72,7 +72,7 @@ bool on = false;
 void loop()
 {
   
-  if (digitalRead(27) == HIGH && millis()- timer > 2000) {
+  if (digitalRead(27) == HIGH && millis()- timer > 1000) {
     digitalToggle(LED_BUILTIN);
     Serial.print(millis()/1000);
     timer = millis();

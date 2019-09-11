@@ -17,9 +17,11 @@
 
 
 /* HRM Service Definitions
-   Heart Rate Monitor Service:  0x180D
+   Heart Rate Monitor Service:  0x180Da
    Heart Rate Measurement Char: 0x2A37
    Body Sensor Location Char:   0x2A38
+
+   0x2aceab38cb354edcbc48f2510e458ea8
 */
 BLEService        hrms = BLEService(0x8888);
 BLECharacteristic hrmc = BLECharacteristic(UUID16_CHR_HEART_RATE_MEASUREMENT);
