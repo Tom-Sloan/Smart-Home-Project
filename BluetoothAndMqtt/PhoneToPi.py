@@ -17,20 +17,21 @@ try:
 	pub_topic = sub_list[0]
 	sub_topic = sub_list[1]
 
+	# TODO: Change it so sleep(3) is no longer needed. It has been started with state
 	def bluetooth_call(message):
 		print("Called Bluetooth")
 		sleep(3)
 		if None in [BLE_SERVER, UUID]:
-			send_ble(message=message)
+			state = send_ble(message=message)
 		else:
-			send_ble(addr=BLE_SERVER ,uuid=UUID , message=message)
-		return message
+			state = send_ble(addr=BLE_SERVER ,uuid=UUID , message=message)
+		return message, state
 
 
 	def on_message(client, userdata, message):
 		sleep(1)
 		message = str(message.payload.decode("utf-8").strip())
-		
+
 		try:
 			if message == "quit":
 				print("setting flag to false")
@@ -64,4 +65,3 @@ finally:
 	sleep(1)
 	client.disconnect()
 	client.loop_stop()
-

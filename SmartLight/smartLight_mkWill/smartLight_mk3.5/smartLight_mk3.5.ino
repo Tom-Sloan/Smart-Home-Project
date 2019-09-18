@@ -27,7 +27,7 @@ BLEDis bledis;    // DIS (Device Information Service) helper class instance
 BLEBas blebas;    // BAS (Battery Service) helper class instance
 uint8_t  bps = 0;
 boolean canGrabValue = false;
-
+int count = 0;
 
 // Advanced function prototypes
 void startAdv(void);
@@ -67,6 +67,7 @@ void setup()
   // Set the connect/disconnect callback handlers
   Bluefruit.Periph.setConnectCallback(connect_callback);
   Bluefruit.Periph.setDisconnectCallback(disconnect_callback);
+  
 
   // Configure and Start the Device Information Service
   Serial.println("Configuring the Device Information Service");
@@ -171,6 +172,7 @@ void disconnect_callback(uint16_t conn_handle, uint8_t reason)
   canGrabValue = false;
   
 }
+
 /*
 void cccd_callback(BLECharacteristic& chr, uint16_t cccd_value)
 {
@@ -224,6 +226,11 @@ void loop()
 }
 
 void event(int action) {
+  if ( count == 0 ){
+    action = 1;
+    count++;
+    Serial.println("using count at 0");
+  }
   if ( greenLightStatus && !blueLightStatus){
     Serial.println("true and false");
   } else if (!greenLightStatus && blueLightStatus){
