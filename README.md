@@ -14,4 +14,5 @@ This is more of a proof of work rather than a source for coding inspiration.
 ![App Demo](20191228_131425.GIF)
 
 <h4> This is a version 1 of the Smart Blind: <h4>
-![Image of smart blind](https://github.com/Tom-Sloan/Smart-Home-Project/blob/master/image6.png "Smart Blind Image")
+<img width="3024" height="4032" alt="image" src="https://github.com/user-attachments/assets/7487d27f-7387-488d-a5bc-b5e81d030a4d" />
+
